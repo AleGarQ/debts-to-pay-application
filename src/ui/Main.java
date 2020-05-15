@@ -19,7 +19,7 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader fxmll = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+		FXMLLoader fxmll = new FXMLLoader(getClass().getResource("InitialScreen.fxml"));
 		fxmll.setController(debtsGUI);
 		Parent root = fxmll.load();
 		root.getStylesheets().add(getClass().getResource("styleFirstScreen.css").toExternalForm());

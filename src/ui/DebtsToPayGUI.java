@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class DebtsToPayGUI {
@@ -88,6 +89,17 @@ public class DebtsToPayGUI {
 		  
 		  mainPane.getChildren().clear();
 		  mainPane.setCenter(menuPane);
+	  }
+	  
+	  @FXML
+	  void startApplication(MouseEvent event) throws IOException {
+		  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+		  
+		  fxmlLoader.setController(this);    	
+		  Parent welcomePane = fxmlLoader.load();
+		  
+		  mainPane.getChildren().clear();
+		  mainPane.setCenter(welcomePane);
 	  }
 	  
 	  public void initializeComboBoxLists() {
