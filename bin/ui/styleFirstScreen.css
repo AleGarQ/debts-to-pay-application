@@ -1,0 +1,28 @@
+.root{
+	
+}
+.button{
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 12 45 12 45;
+}
+.label{
+	-fx-text-fill: black;
+}
+
+VBox, AnchorPane{
+    -fx-alignment: center;
+    -fx-padding: 10;
+}
+.text-field{
+    -fx-max-width: 250;
+    -fx-min-height: 30;
+}
+HBox, VBox{
+	 -fx-alignment: center;
+    -fx-padding: 10;
+}
+
