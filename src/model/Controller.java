@@ -69,13 +69,11 @@ public class Controller {
 			firstAccount = aux;
 		}else {
 			Account current = firstAccount;
-			while(current.getNext() != firstAccount) {
+			while(current.getNext() != null) {
 				current = current.getNext();
 			}
 			current.setNext(aux);
 		}
-		
-		aux.setNext(firstAccount);
 	}
 	
 	public Account findAccount(String username, String password) {
@@ -119,14 +117,5 @@ public class Controller {
 			}
 		}		
 		return found;
-	}
-	
-	public void getAccounts() {
-		Account aux = firstAccount;
-		
-		while (aux != null) {
-			System.out.println(aux.getName());
-			aux = aux.getNext();
-		}
 	}
 }

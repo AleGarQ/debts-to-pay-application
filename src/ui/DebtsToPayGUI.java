@@ -164,20 +164,54 @@ public class DebtsToPayGUI {
 				if(user != null) {
 					loadMenuScreen();
 					nameOnScreen.setText(user.getName() + " " + user.getLastname());
+				}else {
+					Alert wrongPassword = new Alert(AlertType.WARNING);
+					wrongPassword.setTitle("WRONG PASSWORD");
+					wrongPassword.setHeaderText("The password entered does not match the user");
+					wrongPassword.setContentText("Please correct it");
+					wrongPassword.showAndWait();
 				}
+			}else {
+				Alert usernameNotFound = new Alert(AlertType.WARNING);
+				usernameNotFound.setTitle("WRONG OR NOT REGISTERED USERNAME");
+				usernameNotFound.setHeaderText("The username entered has not been found");
+				usernameNotFound.setContentText("Please correct it or register");
+				usernameNotFound.showAndWait();
 			}
 		}else {
-			Alert added = new Alert(AlertType.WARNING);
-			added.setTitle("EMPTY FIELDS");
-			added.setHeaderText("Some fields are empty");
-			added.setContentText("Please fill them and try again");
-			added.showAndWait();
+			Alert fields = new Alert(AlertType.WARNING);
+			fields.setTitle("EMPTY FIELDS");
+			fields.setHeaderText("Some fields are empty");
+			fields.setContentText("Please fill them and try again");
+			fields.showAndWait();
 		}
 	}
 
 	@FXML
-	void signUp(ActionEvent event) {
-		
+	void signUp(ActionEvent event) throws IOException {
+		if(!usernameSU.getText().equals("") 
+				&& !passwSU.getText().equals("") 
+				&& !emailSU.getText().equals("")
+				&& !nameSU.getText().equals("") 
+				&& !lastnameSU.getText().equals("")) {
+			if(!control.searchUsername(usernameSU.getText())) {
+					control.addAccount(nameSU.getText(), lastnameSU.getText(), emailSU.getText(), usernameSU.getText(), passwSU.getText());
+					loadMenuScreen();
+					nameOnScreen.setText(nameSU.getText() + " " + lastnameSU.getText());
+			}else {
+				Alert usernameNotFound = new Alert(AlertType.WARNING);
+				usernameNotFound.setTitle("USERNAME ALREADY TAKEN");
+				usernameNotFound.setHeaderText("The username entered is in use");
+				usernameNotFound.setContentText("Please sign in with it or choose another");
+				usernameNotFound.showAndWait();
+			}
+		}else {
+			Alert fields = new Alert(AlertType.WARNING);
+			fields.setTitle("EMPTY FIELDS");
+			fields.setHeaderText("Some fields are empty");
+			fields.setContentText("Please fill them and try again");
+			fields.showAndWait();
+		}
 	}
 	
 	public void loadMenuScreen() throws IOException {

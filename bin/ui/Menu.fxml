@@ -126,14 +126,14 @@
                            <children>
                               <ComboBox fx:id="showPayments" layoutX="140.0" layoutY="58.0" prefWidth="150.0" promptText="Show" />
                               <ComboBox fx:id="sortPayments" layoutX="443.0" layoutY="58.0" prefWidth="150.0" promptText="Sort by" />
-                              <CheckBox layoutX="140.0" layoutY="196.0" mnemonicParsing="false" text="Screen" />
+                              <CheckBox fx:id="screenBoxPay" layoutX="140.0" layoutY="196.0" mnemonicParsing="false" text="Screen" />
                               <Label layoutX="140.0" layoutY="179.0" text="Print in">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <CheckBox layoutX="140.0" layoutY="215.0" mnemonicParsing="false" text="Text File" />
-                              <Button layoutX="342.0" layoutY="284.0" mnemonicParsing="false" text="Show" />
+                              <CheckBox fx:id="textFileBoxPay" layoutX="140.0" layoutY="215.0" mnemonicParsing="false" text="Text File" />
+                              <Button layoutX="342.0" layoutY="284.0" mnemonicParsing="false" onAction="#showPayments" text="Show" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -144,14 +144,14 @@
                            <children>
                               <ComboBox fx:id="showProviders" layoutX="140.0" layoutY="60.0" prefWidth="150.0" promptText="Show" />
                               <ComboBox fx:id="sortProviders" layoutX="440.0" layoutY="60.0" prefWidth="150.0" promptText="Sort by" />
-                              <CheckBox layoutX="141.0" layoutY="212.0" mnemonicParsing="false" text="Screen" />
+                              <CheckBox fx:id="screenBoxProv" layoutX="141.0" layoutY="212.0" mnemonicParsing="false" text="Screen" />
                               <Label layoutX="139.0" layoutY="195.0" text="Print in">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <CheckBox layoutX="141.0" layoutY="230.0" mnemonicParsing="false" text="Text File" />
-                              <Button layoutX="342.0" layoutY="270.0" mnemonicParsing="false" text="Show" />
+                              <CheckBox fx:id="textFileBoxProv" layoutX="141.0" layoutY="230.0" mnemonicParsing="false" text="Text File" />
+                              <Button layoutX="342.0" layoutY="270.0" mnemonicParsing="false" onAction="#showProviders" text="Show" />
                            </children>
                         </AnchorPane>
                     </content>
