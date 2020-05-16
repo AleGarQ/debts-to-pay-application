@@ -32,17 +32,17 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="729.0">
                            <children>
-                              <Button layoutX="300.0" layoutY="318.0" mnemonicParsing="false" text="Submit" />
+                              <Button layoutX="300.0" layoutY="320.0" mnemonicParsing="false" onAction="#registerProvider" text="Submit" />
                               <Label layoutX="290.0" layoutY="60.0" text="Bussines Name" />
-                              <TextField layoutX="290.0" layoutY="77.0" />
+                              <TextField fx:id="bussinesN" layoutX="290.0" layoutY="77.0" />
                               <Label layoutX="292.0" layoutY="106.0" text="NIT" />
-                              <TextField layoutX="290.0" layoutY="172.0" />
+                              <TextField fx:id="intermediaryN" layoutX="290.0" layoutY="172.0" />
                               <Label layoutX="290.0" layoutY="203.0" text="Intermediary Number" />
-                              <TextField layoutX="290.0" layoutY="220.0" />
+                              <TextField fx:id="intermediaryNumb" layoutX="290.0" layoutY="220.0" />
                               <Label layoutX="292.0" layoutY="155.0" text="Intermediary Name" />
-                              <TextField layoutX="290.0" layoutY="123.0" />
+                              <TextField fx:id="nit" layoutX="290.0" layoutY="123.0" />
                               <Label layoutX="290.0" layoutY="251.0" text="Bank Account" />
-                              <TextField layoutX="290.0" layoutY="268.0" />
+                              <TextField fx:id="bankAcc" layoutX="290.0" layoutY="268.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -51,11 +51,13 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="575.0">
                            <children>
-                              <Button layoutX="338.0" layoutY="262.0" mnemonicParsing="false" text="Submit" />
+                              <Button layoutX="338.0" layoutY="262.0" mnemonicParsing="false" onAction="#updateIntermediary" text="Submit" />
                               <Label layoutX="290.0" layoutY="139.0" text="Intermediary Name" />
-                              <TextField layoutX="290.0" layoutY="156.0" />
-                              <TextField layoutX="290.0" layoutY="202.0" />
+                              <TextField fx:id="intermediaryNameUpd" layoutX="290.0" layoutY="156.0" />
+                              <TextField fx:id="intermediaryPhoneUpd" layoutX="290.0" layoutY="202.0" />
                               <Label layoutX="290.0" layoutY="185.0" text="Intermediary Phone" />
+                              <Label layoutX="290.0" layoutY="94.0" text="Provider's Name" />
+                              <TextField fx:id="providerNameUpd" layoutX="290.0" layoutY="112.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -65,22 +67,22 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Label layoutX="150.0" layoutY="66.0" text="Concept" />
-                              <TextField layoutX="150.0" layoutY="217.0" />
+                              <TextField fx:id="valueBill" layoutX="150.0" layoutY="217.0" />
                               <Label layoutX="150.0" layoutY="154.0" text="Current" />
-                              <TextField layoutX="150.0" layoutY="128.0" />
+                              <TextField fx:id="providerNameBill" layoutX="150.0" layoutY="128.0" />
                               <Label layoutX="417.0" layoutY="66.0" text="Limit Payment Date" />
-                              <TextField layoutX="417.0" layoutY="83.0" />
+                              <TextField fx:id="limitPaymentDate" layoutX="417.0" layoutY="83.0" />
                               <Label layoutX="150.0" layoutY="200.0" text="Value" />
-                              <TextField layoutX="150.0" layoutY="83.0" />
-                              <Label layoutX="150.0" layoutY="111.0" text="Provider Name" />
-                              <TextField layoutX="150.0" layoutY="171.0" />
-                              <TextField layoutX="417.0" layoutY="128.0" />
+                              <TextField fx:id="conceptBill" layoutX="150.0" layoutY="83.0" />
+                              <Label layoutX="150.0" layoutY="111.0" text="Provider's Name" />
+                              <TextField fx:id="current" layoutX="150.0" layoutY="171.0" />
+                              <TextField fx:id="interestPercentage" layoutX="417.0" layoutY="128.0" />
                               <Label layoutX="417.0" layoutY="111.0" text="Interest Percentage" />
                               <Label layoutX="418.0" layoutY="154.0" text="Payment Method" />
-                              <TextField layoutX="417.0" layoutY="171.0" />
+                              <TextField fx:id="paymentMethod" layoutX="417.0" layoutY="171.0" />
                               <Label layoutX="418.0" layoutY="200.0" text="Fees" />
-                              <TextField layoutX="417.0" layoutY="217.0" />
-                              <Button layoutX="338.0" layoutY="286.0" mnemonicParsing="false" text="Submit" />
+                              <TextField fx:id="fees" layoutX="417.0" layoutY="217.0" />
+                              <Button layoutX="338.0" layoutY="286.0" mnemonicParsing="false" onAction="#registerNewBill" text="Submit" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -90,12 +92,12 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Label layoutX="290.0" layoutY="128.0" text="Concept" />
-                              <TextField layoutX="290.0" layoutY="145.0" />
-                              <TextField layoutX="290.0" layoutY="191.0" />
+                              <TextField fx:id="conceptPay" layoutX="290.0" layoutY="145.0" />
+                              <TextField fx:id="valuePay" layoutX="290.0" layoutY="191.0" />
                               <Label layoutX="291.0" layoutY="174.0" text="Value" />
                               <Label layoutX="291.0" layoutY="82.0" text="Provider Name" />
-                              <TextField layoutX="290.0" layoutY="99.0" />
-                              <Button layoutX="338.0" layoutY="244.0" mnemonicParsing="false" text="Submit" />
+                              <TextField fx:id="providerNamePay" layoutX="290.0" layoutY="99.0" />
+                              <Button layoutX="338.0" layoutY="244.0" mnemonicParsing="false" onAction="#registerPayment" text="Submit" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -106,14 +108,14 @@
                            <children>
                               <ComboBox fx:id="showBills" layoutX="140.0" layoutY="41.0" prefWidth="150.0" promptText="Show" />
                               <ComboBox fx:id="sortBills" layoutX="441.0" layoutY="41.0" prefWidth="150.0" promptText="Sort by" />
-                              <CheckBox layoutX="140.0" layoutY="197.0" mnemonicParsing="false" text="Screen" />
+                              <CheckBox fx:id="screenBoxBill" layoutX="140.0" layoutY="197.0" mnemonicParsing="false" text="Screen" />
                               <Label layoutX="140.0" layoutY="180.0" text="Print in">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <CheckBox layoutX="140.0" layoutY="216.0" mnemonicParsing="false" text="Text File" />
-                              <Button layoutX="342.0" layoutY="264.0" mnemonicParsing="false" text="Show" />
+                              <CheckBox fx:id="textFileBoxBill" layoutX="140.0" layoutY="216.0" mnemonicParsing="false" text="Text File" />
+                              <Button layoutX="342.0" layoutY="264.0" mnemonicParsing="false" onAction="#showBills" text="Show" />
                            </children>
                         </AnchorPane>
                     </content>
