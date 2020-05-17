@@ -42,11 +42,6 @@ public class Provider {
 		return "";
 	}
 
-	public String toString() {
-		// TODO
-		return "";
-	}
-
 	public ArrayList<Bill> getBills() {
 		return bills;
 	}
@@ -89,5 +84,10 @@ public class Provider {
 
 	public void setWorking(boolean working) {
 		this.working = working;
+	}
+	
+	public String toString() {
+		String info = ""+ bussinessName + " " + nit + " " + account.getBankName() +" "+ account.getAccountNumber() + " " + intermediaryName + " "+ intermediaryPhone + " " + working;
+		return info;
 	}
 }

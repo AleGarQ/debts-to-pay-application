@@ -32,7 +32,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="729.0">
                            <children>
-                              <Button layoutX="300.0" layoutY="320.0" mnemonicParsing="false" onAction="#registerProvider" text="Submit" />
+                              <Button layoutX="298.0" layoutY="359.0" mnemonicParsing="false" onAction="#registerProvider" text="Submit" />
                               <Label layoutX="290.0" layoutY="60.0" text="Bussines Name" />
                               <TextField fx:id="bussinesN" layoutX="290.0" layoutY="77.0" />
                               <Label layoutX="292.0" layoutY="106.0" text="NIT" />
@@ -41,8 +41,10 @@
                               <TextField fx:id="intermediaryNumb" layoutX="290.0" layoutY="220.0" />
                               <Label layoutX="292.0" layoutY="155.0" text="Intermediary Name" />
                               <TextField fx:id="nit" layoutX="290.0" layoutY="123.0" />
-                              <Label layoutX="290.0" layoutY="251.0" text="Bank Account" />
-                              <TextField fx:id="bankAcc" layoutX="290.0" layoutY="268.0" />
+                              <Label layoutX="290.0" layoutY="251.0" text="Bank Name" />
+                              <TextField fx:id="bankName" layoutX="290.0" layoutY="268.0" />
+                              <Label layoutX="291.0" layoutY="296.0" text="Account Number" />
+                              <TextField fx:id="accountNumber" layoutX="290.0" layoutY="313.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -51,7 +53,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="575.0">
                            <children>
-                              <Button layoutX="338.0" layoutY="262.0" mnemonicParsing="false" onAction="#updateIntermediary" text="Submit" />
+                              <Button layoutX="295.0" layoutY="262.0" mnemonicParsing="false" onAction="#updateIntermediary" text="Submit" />
                               <Label layoutX="290.0" layoutY="139.0" text="Intermediary Name" />
                               <TextField fx:id="intermediaryNameUpd" layoutX="290.0" layoutY="156.0" />
                               <TextField fx:id="intermediaryPhoneUpd" layoutX="290.0" layoutY="202.0" />
@@ -82,7 +84,7 @@
                               <TextField fx:id="paymentMethod" layoutX="417.0" layoutY="171.0" />
                               <Label layoutX="418.0" layoutY="200.0" text="Fees" />
                               <TextField fx:id="fees" layoutX="417.0" layoutY="217.0" />
-                              <Button layoutX="338.0" layoutY="286.0" mnemonicParsing="false" onAction="#registerNewBill" text="Submit" />
+                              <Button layoutX="290.0" layoutY="286.0" mnemonicParsing="false" onAction="#registerNewBill" text="Submit" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -97,7 +99,7 @@
                               <Label layoutX="291.0" layoutY="174.0" text="Value" />
                               <Label layoutX="291.0" layoutY="82.0" text="Provider Name" />
                               <TextField fx:id="providerNamePay" layoutX="290.0" layoutY="99.0" />
-                              <Button layoutX="338.0" layoutY="244.0" mnemonicParsing="false" onAction="#registerPayment" text="Submit" />
+                              <Button layoutX="299.0" layoutY="244.0" mnemonicParsing="false" onAction="#registerPayment" text="Submit" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -115,7 +117,7 @@
                                  </font>
                               </Label>
                               <CheckBox fx:id="textFileBoxBill" layoutX="140.0" layoutY="216.0" mnemonicParsing="false" text="Text File" />
-                              <Button layoutX="342.0" layoutY="264.0" mnemonicParsing="false" onAction="#showBills" text="Show" />
+                              <Button layoutX="309.0" layoutY="264.0" mnemonicParsing="false" onAction="#showBills" text="Show" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -133,7 +135,7 @@
                                  </font>
                               </Label>
                               <CheckBox fx:id="textFileBoxPay" layoutX="140.0" layoutY="215.0" mnemonicParsing="false" text="Text File" />
-                              <Button layoutX="342.0" layoutY="284.0" mnemonicParsing="false" onAction="#showPayments" text="Show" />
+                              <Button layoutX="317.0" layoutY="284.0" mnemonicParsing="false" onAction="#showPayments" text="Show" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -151,7 +153,7 @@
                                  </font>
                               </Label>
                               <CheckBox fx:id="textFileBoxProv" layoutX="141.0" layoutY="230.0" mnemonicParsing="false" text="Text File" />
-                              <Button layoutX="342.0" layoutY="270.0" mnemonicParsing="false" onAction="#showProviders" text="Show" />
+                              <Button layoutX="310.0" layoutY="270.0" mnemonicParsing="false" onAction="#showProviders" text="Show" />
                            </children>
                         </AnchorPane>
                     </content>

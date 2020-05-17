@@ -15,9 +15,13 @@ public class Controller {
 		firstAccount = new Account("Alejandro", "Garcia", "alejandro.garcia1@hotmail.com", "p", "p");
 	}
 
-	public void addProvider(String bankName, String accountNumber, String bussinessName, String nit,
-			String intermediaryName, String intermediaryPhone) throws ProviderAlreadyOnListException {
-		// TODO
+	public void addProvider(String bankName, String accountNumber, String bussinessName, String nit, String intermediaryName, String intermediaryPhone) throws ProviderAlreadyOnListException {
+		if (!searchProvider(nit)) {
+			Provider aux = new Provider(new BankEntity(accountNumber, bankName), bussinessName, nit, intermediaryName, intermediaryPhone, true);
+			providers.add(aux);
+		}else {
+			throw new ProviderAlreadyOnListException("The provider's NIT entered is already registered");
+		}
 	}
 
 	public void addBill(String providerName, String concept, boolean current, double value, GregorianCalendar builtDate,
@@ -50,12 +54,19 @@ public class Controller {
 	}
 
 	public String showProviders() {
-		// TODO
 		return "";
 	}
 
-	public void searchProvider(String nit) {
-		// TODO
+	public boolean searchProvider(String nit) {
+		boolean exists = false;
+		
+		for (int i = 0; i < providers.size() && !exists; i++) {
+			if (providers.get(i).getNit().equals(nit)) {
+				exists = true;
+			}
+		}
+		
+		return exists;
 	}
 
 	public void searchBill(String nit, String concept) {
@@ -117,5 +128,37 @@ public class Controller {
 			}
 		}		
 		return found;
+	}
+
+	public void selectionSortProvidersByBussines() {
+		for (int i = 0; i < providers.size()-1; i++) {
+			Provider min = providers.get(i);
+			int pos = i;
+			
+			for (int j = i + 1; j < providers.size(); j++) {
+				if (providers.get(j).getBussinessName().compareTo(min.getBussinessName()) < 0) {
+					min = providers.get(j);
+					pos = j;
+				}
+				
+				Provider aux = providers.get(i);
+				providers.set(i, min);
+				providers.set(pos, aux);
+			}
+		}
+	}
+
+	public void bubbleSortProvidersByIntermediary() {
+		Provider aux = null;
+		
+		for (int i = 1; i < providers.size(); i++) {
+			for (int j = 0; j < providers.size() - i; j++) {
+				if (providers.get(j).getIntermediaryName().compareTo(providers.get(j + 1).getIntermediaryName()) > 0) {
+					aux = providers.get(j);
+					providers.set(j, providers.get(j + 1));
+					providers.set(j + 1, aux);
+				}
+			}
+		}
 	}
 }

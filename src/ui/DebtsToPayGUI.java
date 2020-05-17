@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 
+import exceptions.ProviderAlreadyOnListException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,7 +56,9 @@ public class DebtsToPayGUI {
 	@FXML
 	private TextField nit;
 	@FXML
-	private TextField bankAcc;
+	private TextField bankName;
+	@FXML
+	private TextField accountNumber;
 	
 //	Update Intermediary-------------------------------------
 	@FXML
@@ -189,11 +192,7 @@ public class DebtsToPayGUI {
 
 	@FXML
 	void signUp(ActionEvent event) throws IOException {
-		if(!usernameSU.getText().equals("") 
-				&& !passwSU.getText().equals("") 
-				&& !emailSU.getText().equals("")
-				&& !nameSU.getText().equals("") 
-				&& !lastnameSU.getText().equals("")) {
+		if(!usernameSU.getText().equals("") && !passwSU.getText().equals("") && !emailSU.getText().equals("") && !nameSU.getText().equals("") && !lastnameSU.getText().equals("")) {
 			if(!control.searchUsername(usernameSU.getText())) {
 					control.addAccount(nameSU.getText(), lastnameSU.getText(), emailSU.getText(), usernameSU.getText(), passwSU.getText());
 					loadMenuScreen();
@@ -249,7 +248,34 @@ public class DebtsToPayGUI {
 	
 	@FXML
 	void registerProvider(ActionEvent event) {
-		
+		if(!bussinesN.getText().equals("") && !intermediaryN.getText().equals("") && !intermediaryNumb.getText().equals("") && !nit.getText().equals("") && !bankName.getText().equals("") && !accountNumber.getText().equals("")) {
+			try {
+				control.addProvider(bankName.getText(), accountNumber.getText(), bussinesN.getText(), nit.getText(), intermediaryN.getText(), intermediaryNumb.getText());
+				bussinesN.setText("");
+				intermediaryN.setText("");
+				intermediaryNumb.setText("");
+				nit.setText("");
+				bankName.setText("");
+				accountNumber.setText("");
+				Alert usernameNotFound = new Alert(AlertType.INFORMATION);
+				usernameNotFound.setTitle("PROVIDER REGISTERED SUCCESSFULY");
+				usernameNotFound.setHeaderText("The provider now is in our system");
+				usernameNotFound.setContentText("To register a bill to this intermediary go to \"Register new bill\" tab");
+				usernameNotFound.showAndWait();
+			} catch (ProviderAlreadyOnListException e) {
+				Alert usernameNotFound = new Alert(AlertType.WARNING);
+				usernameNotFound.setTitle("PROVIDER ALREADY REGISTERED");
+				usernameNotFound.setHeaderText(e.getMessage());
+				usernameNotFound.setContentText("Please make sure it is right");
+				usernameNotFound.showAndWait();
+			}
+		}else {
+			Alert fields = new Alert(AlertType.WARNING);
+			fields.setTitle("EMPTY FIELDS");
+			fields.setHeaderText("Some fields are empty");
+			fields.setContentText("Please fill them and try again");
+			fields.showAndWait();
+		}
 	}
 	
 	@FXML
@@ -264,7 +290,41 @@ public class DebtsToPayGUI {
 
 	@FXML
 	void showProviders(ActionEvent event) {
+		if (!showProviders.getValue().equals("Show") && !sortProviders.getValue().equals("Sort by") && (screenBoxProv.isSelected() || textFileBoxProv.isSelected())) {
+			if (sortProviders.getValue().equals("Bussines Name")) {
+				control.selectionSortProvidersByBussines();
+				optionsToPrintProviders();
+			}else {
+				control.bubbleSortProvidersByIntermediary();
+				optionsToPrintProviders();
+			}
+		}else {
+			Alert fields = new Alert(AlertType.WARNING);
+			fields.setTitle("EMPTY FIELDS");
+			fields.setHeaderText("Some fields are empty");
+			fields.setContentText("Please fill them and try again");
+			fields.showAndWait();
+		}
+	}
+	
+	public void optionsToPrintProviders() {
+		if (showProviders.getValue().equals("All")) {
+			
+		}else if (showProviders.getValue().equals("Actives")) {
+			
+		}else if (showProviders.getValue().equals("Inactives")) {
+			
+		}else if (showProviders.getValue().equals("Without Bill")) {
+			
+		}
 		
+		if (screenBoxProv.isSelected()) {
+			
+		}
+		
+		if (textFileBoxProv.isSelected()) {
+			
+		}
 	}
 	
 	@FXML
