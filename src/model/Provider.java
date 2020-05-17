@@ -1,7 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import exceptions.BillAlreadyOnListException;
+import exceptions.ExceededBillFinalPaymentDayException;
+import exceptions.ExceededBillValueException;
+import exceptions.InvalidInformationException;
 
 public class Provider {
 	private ArrayList<Bill> bills;
@@ -25,16 +31,55 @@ public class Provider {
 
 	public void addBill(String concept, boolean current, double value, GregorianCalendar builtDate,
 			GregorianCalendar finalPaymentDate, double interestPercentage, int fee, String paymentMethod, boolean paid,
-			double valuePaid) {
-		// TODO
+			double valuePaid) throws BillAlreadyOnListException { 
+		Bill toAdd = new Bill(concept, current, value, builtDate, finalPaymentDate, interestPercentage, fee, paymentMethod, paid, valuePaid);
+		if (searchBill(concept)) {
+			throw new BillAlreadyOnListException();
+		} else {
+			bills.add(toAdd);
+		}
+			
 	}
 
-	public void addPayment(String billConcept) {
-		// TODO
+	public void addPayment(String billConcept, double value) throws InvalidInformationException, ExceededBillValueException, ExceededBillFinalPaymentDayException {
+		Bill toPay = searchBills(billConcept);
+		Calendar today = new GregorianCalendar();
+		if (today.compareTo(toPay.getFinalPaymentDate()) > 0) {
+			toPay.setValue(toPay.getValue() * (1 + toPay.getInterestPercentage()));
+			throw new ExceededBillFinalPaymentDayException();
+		} 
+		if (toPay.getValue() - toPay.getValuePaid() < value) {
+			throw new ExceededBillValueException(value - toPay.getValue() - toPay.getValuePaid());
+		} else {
+			toPay.setValuePaid(value + toPay.getValuePaid());
+			if (toPay.getValuePaid() == toPay.getValue()) {
+				toPay.setPaid(true);
+			}
+		}
+		
 	}
 
-	public void searchBill(String concept) {
-		// TODO
+	public boolean searchBill(String concept) {
+		boolean ward = false;
+		for (int i = 0; i < bills.size(); i++) {
+			if (bills.get(i).getConcept().equalsIgnoreCase(concept)) {
+				ward = true;
+			}
+		}
+		return ward;
+	}
+	
+	public Bill searchBills(String billConcept) throws InvalidInformationException {
+		Bill toSearch = null;
+		for (int i = 0; i < bills.size(); i++) {
+			if (bills.get(i).getConcept().equalsIgnoreCase(billConcept)) {
+				toSearch = bills.get(i);
+			}
+		}
+		if (toSearch == null) {
+			throw new InvalidInformationException();
+		}
+		return toSearch;
 	}
 
 	public String showPaymentsMade() {
