@@ -1,0 +1,7 @@
+          PROVIDERS INFO          
+----------------------------------
+----------------------------------
+Business| NIT	| Bank	| Account #	| Intermediary	| Phone	| State
+colombina |12345 |bancolombia |12345 |Sebastian |3105896411 |true
+rimax |1234567 |bancolombia |1234567 |Isabella |3105896411 |true
+

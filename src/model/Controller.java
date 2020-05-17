@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import exceptions.BillAlreadyOnListException;
 import exceptions.ProviderAlreadyOnListException;
@@ -12,6 +13,11 @@ public class Controller {
 
 	public Controller() {
 		this.providers = new ArrayList<Provider>();
+		providers.add(new Provider(new BankEntity("12345", "bancolombia"), "colombina", "12345", "Sebastian", "3105896411", true));
+		providers.add(new Provider(new BankEntity("123456", "bancolombia"), "coca cola", "123456", "Alejandro", "3105896411", false));
+		providers.add(new Provider(new BankEntity("1234567", "bancolombia"), "rimax", "1234567", "Isabella", "3105896411", true));
+		providers.add(new Provider(new BankEntity("12345678", "bancolombia"), "dell", "12345678", "Maria", "3105896411", false));
+		providers.get(1).addBill("Vasos", true, 150000.0, new GregorianCalendar(2001, 01, 22), new GregorianCalendar(2010, 01, 22), 0.1, 0, "no lo se", false, 100000.0);
 		firstAccount = new Account("Alejandro", "Garcia", "alejandro.garcia1@hotmail.com", "p", "p");
 	}
 
@@ -131,21 +137,19 @@ public class Controller {
 	}
 
 	public void selectionSortProvidersByBussines() {
-		for (int i = 0; i < providers.size()-1; i++) {
-			Provider min = providers.get(i);
+		for (int i = 0; i < providers.size(); i++) {
 			int pos = i;
 			
-			for (int j = i + 1; j < providers.size(); j++) {
-				if (providers.get(j).getBussinessName().compareTo(min.getBussinessName()) < 0) {
-					min = providers.get(j);
-					pos = j;
-				}
-				
-				Provider aux = providers.get(i);
-				providers.set(i, min);
-				providers.set(pos, aux);
-			}
-		}
+            for (int j = i; j < providers.size(); j++) {
+                if (providers.get(j).getBussinessName().compareTo(providers.get(pos).getBussinessName()) < 0) {
+                    pos = j;
+                }
+            }
+
+            Provider min = providers.get(pos);
+            providers.set(pos, providers.get(i));
+            providers.set(i, min);
+        }
 	}
 
 	public void bubbleSortProvidersByIntermediary() {
@@ -160,5 +164,59 @@ public class Controller {
 				}
 			}
 		}
+	}
+	
+	public List<Provider> getProviders(){
+		return providers;
+	}
+	
+	public List<Provider> getActiveProviders(){
+		ArrayList<Provider> act = new ArrayList<Provider>();
+		
+		for (int i = 0; i < providers.size(); i++) {
+			if(providers.get(i).isWorking()) {
+				act.add(providers.get(i));
+			}
+		}
+		
+		return act;
+	}
+	
+	public List<Provider> getInactiveProviders(){
+		ArrayList<Provider> act = new ArrayList<Provider>();
+		
+		for (int i = 0; i < providers.size(); i++) {
+			if(!providers.get(i).isWorking()) {
+				act.add(providers.get(i));
+			}
+		}
+		
+		return act;
+	}
+	
+	public List<Provider> getWBProviders(){
+		ArrayList<Provider> act = new ArrayList<Provider>();
+		
+		for (int i = 0; i < providers.size(); i++) {
+			if(providers.get(i).getBills().isEmpty()) {
+				act.add(providers.get(i));
+			}
+		}
+		
+		return act;
+	}
+	
+	public List<Bill> getBills(){
+		ArrayList<Bill> bills = new ArrayList<Bill>();
+		
+		for (int i = 0; i < providers.size(); i++) {
+			if (!providers.get(i).getBills().isEmpty()) {
+				for (int j = 0; j < providers.get(i).getBills().size(); j++) {
+					bills.add(providers.get(i).getBills().get(j));
+				}
+			}
+		}
+		
+		return bills;
 	}
 }

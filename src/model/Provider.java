@@ -66,8 +66,12 @@ public class Provider {
 		this.intermediaryPhone = intermediaryPhone;
 	}
 
-	public BankEntity getAccount() {
-		return account;
+	public String getAccount() {
+		return account.getAccountNumber();
+	}
+	
+	public String getBank() {
+		return account.getBankName();
 	}
 
 	public String getBussinessName() {
@@ -87,7 +91,7 @@ public class Provider {
 	}
 	
 	public String toString() {
-		String info = ""+ bussinessName + " " + nit + " " + account.getBankName() +" "+ account.getAccountNumber() + " " + intermediaryName + " "+ intermediaryPhone + " " + working;
+		String info = bussinessName + " |" + nit + " |" + account.getBankName() +" |"+ account.getAccountNumber() + " |" + intermediaryName + " |"+ intermediaryPhone + " |" + working;
 		return info;
 	}
 }
