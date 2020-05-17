@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import exceptions.BillAlreadyOnListException;
+import exceptions.InvalidInformationException;
 import exceptions.ProviderAlreadyOnListException;
 
 public class Controller {
@@ -27,7 +28,20 @@ public class Controller {
 	public void addBill(String providerName, String concept, boolean current, double value, GregorianCalendar builtDate,
 			GregorianCalendar finalPaymentDate, double interestPercentage, int fee, String paymentMethod, boolean paid,
 			double valuePaid) throws BillAlreadyOnListException {
-		// TODO
+		Provider toAdd = null;
+		try {
+			for (int i = 0; i < providers.size(); i++) {
+				if (providers.get(i).getBussinessName().equalsIgnoreCase(providerName)) {
+					toAdd = providers.get(i);
+				}
+				if (toAdd == null) {
+					throw new InvalidInformationException();
+				}
+			} 
+		} catch (InvalidInformationException e) {
+			e.getMessage();
+		}
+		toAdd.addBill(concept, current, value, builtDate, finalPaymentDate, interestPercentage, fee, paymentMethod, paid, valuePaid);
 	}
 
 	public void modifyProvider(String intermediaryName, String intermediaryPhone) {

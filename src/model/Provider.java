@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import exceptions.BillAlreadyOnListException;
+
 public class Provider {
 	private ArrayList<Bill> bills;
 	private BankEntity account;
@@ -25,16 +27,28 @@ public class Provider {
 
 	public void addBill(String concept, boolean current, double value, GregorianCalendar builtDate,
 			GregorianCalendar finalPaymentDate, double interestPercentage, int fee, String paymentMethod, boolean paid,
-			double valuePaid) {
-		// TODO
+			double valuePaid) throws BillAlreadyOnListException { 
+		Bill toAdd = new Bill(concept, current, value, builtDate, finalPaymentDate, interestPercentage, fee, paymentMethod, paid, valuePaid);
+		if (searchBill(concept)) {
+			throw new BillAlreadyOnListException();
+		} else {
+			bills.add(toAdd);
+		}
+			
 	}
 
 	public void addPayment(String billConcept) {
 		// TODO
 	}
 
-	public void searchBill(String concept) {
-		// TODO
+	public boolean searchBill(String concept) {
+		boolean ward = false;
+		for (int i = 0; i < bills.size(); i++) {
+			if (bills.get(i).getConcept().equalsIgnoreCase(concept)) {
+				ward = true;
+			}
+		}
+		return ward;
 	}
 
 	public String showPaymentsMade() {
