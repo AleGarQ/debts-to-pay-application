@@ -14,7 +14,7 @@ public class Controller {
 	private ArrayList<Provider> providers;
 	private Account firstAccount;
 
-	public Controller() {
+	public Controller() throws BillAlreadyOnListException {
 		this.providers = new ArrayList<Provider>();
 		providers.add(new Provider(new BankEntity("12345", "bancolombia"), "colombina", "12345", "Sebastian", "3105896411", true));
 		providers.add(new Provider(new BankEntity("123456", "bancolombia"), "coca cola", "123456", "Alejandro", "3105896411", false));

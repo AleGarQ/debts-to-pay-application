@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import exceptions.BillAlreadyOnListException;
 import exceptions.ProviderAlreadyOnListException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -156,7 +157,7 @@ public class DebtsToPayGUI {
     private TableColumn<Provider, String> stateColumn;
     
 	
-	public DebtsToPayGUI() {
+	public DebtsToPayGUI() throws BillAlreadyOnListException {
 		control = new Controller();
 	}
 

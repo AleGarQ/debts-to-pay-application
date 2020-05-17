@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.BillAlreadyOnListException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
 	private DebtsToPayGUI debtsGUI;
 	
-	public Main() {
+	public Main() throws BillAlreadyOnListException {
 		debtsGUI = new DebtsToPayGUI();
 	}
 
