@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import exceptions.BillAlreadyOnListException;
+import exceptions.ExceededBillFinalPaymentDayException;
+import exceptions.ExceededBillValueException;
 import exceptions.InvalidInformationException;
 import exceptions.ProviderAlreadyOnListException;
 
@@ -27,29 +29,38 @@ public class Controller {
 
 	public void addBill(String providerName, String concept, boolean current, double value, GregorianCalendar builtDate,
 			GregorianCalendar finalPaymentDate, double interestPercentage, int fee, String paymentMethod, boolean paid,
-			double valuePaid) throws BillAlreadyOnListException {
-		Provider toAdd = null;
-		try {
-			for (int i = 0; i < providers.size(); i++) {
-				if (providers.get(i).getBussinessName().equalsIgnoreCase(providerName)) {
-					toAdd = providers.get(i);
-				}
-				if (toAdd == null) {
-					throw new InvalidInformationException();
-				}
-			} 
-		} catch (InvalidInformationException e) {
-			e.getMessage();
-		}
+			double valuePaid) throws BillAlreadyOnListException, InvalidInformationException {
+		Provider toAdd = searchProviders(providerName);
 		toAdd.addBill(concept, current, value, builtDate, finalPaymentDate, interestPercentage, fee, paymentMethod, paid, valuePaid);
 	}
 
-	public void modifyProvider(String intermediaryName, String intermediaryPhone) {
-		// TODO
+	public void modifyProvider(String bussinessName, String intermediaryName, String intermediaryPhone) throws InvalidInformationException {
+		Provider toChange = searchProviders(bussinessName);
+		if (toChange.getIntermediaryPhone().equals(intermediaryPhone)) {
+			throw new InvalidInformationException();
+		} else {
+			toChange.setIntermediaryName(intermediaryName);
+			toChange.setIntermediaryPhone(intermediaryPhone);
+		}
 	}
 
-	public void addPayment(String providerName, String billConcept, int value) {
-		// TODO
+	public void addPayment(String providerName, String billConcept, double value) throws InvalidInformationException, ExceededBillValueException, ExceededBillFinalPaymentDayException {
+		Provider toPay = searchProviders(providerName);
+		toPay.addPayment(billConcept, value);
+	}
+	
+	public Provider searchProviders(String providerName) throws InvalidInformationException {
+		Provider toSearch = null;
+		for (int i = 0; i < providers.size(); i++) {
+			if (providers.get(i).getBussinessName().equalsIgnoreCase(providerName)) {
+				toSearch = providers.get(i);
+			}
+			if (toSearch == null) {
+				throw new InvalidInformationException();
+			}
+		} 
+		return toSearch;
+		
 	}
 
 	public String showBillsToPay() {

@@ -21,7 +21,6 @@ public class Bill {
 			double valuePaid) {
 		this.concept = concept;
 		this.current = current;
-		this.value = value;
 		this.builtDate = builtDate;
 		this.finalPaymentDate = finalPaymentDate;
 		this.interestPercentage = interestPercentage;
@@ -29,6 +28,7 @@ public class Bill {
 		this.paymentMethod = paymentMethod;
 		this.paid = paid;
 		this.valuePaid = valuePaid;
+		this.value = value * (1 + interestPercentage);
 	}
 
 	public String verifyBillState(double paidValue) throws ExceededBillValueException {
@@ -48,6 +48,10 @@ public class Bill {
 
 	public double getValue() {
 		return value;
+	}
+	
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	public GregorianCalendar getFinalPaymentDate() {

@@ -1,9 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import exceptions.BillAlreadyOnListException;
+import exceptions.ExceededBillFinalPaymentDayException;
+import exceptions.ExceededBillValueException;
+import exceptions.InvalidInformationException;
 
 public class Provider {
 	private ArrayList<Bill> bills;
@@ -37,8 +41,22 @@ public class Provider {
 			
 	}
 
-	public void addPayment(String billConcept) {
-		// TODO
+	public void addPayment(String billConcept, double value) throws InvalidInformationException, ExceededBillValueException, ExceededBillFinalPaymentDayException {
+		Bill toPay = searchBills(billConcept);
+		Calendar today = new GregorianCalendar();
+		if (today.compareTo(toPay.getFinalPaymentDate()) > 0) {
+			toPay.setValue(toPay.getValue() * (1 + toPay.getInterestPercentage()));
+			throw new ExceededBillFinalPaymentDayException();
+		} 
+		if (toPay.getValue() - toPay.getValuePaid() < value) {
+			throw new ExceededBillValueException(value - toPay.getValue() - toPay.getValuePaid());
+		} else {
+			toPay.setValuePaid(value + toPay.getValuePaid());
+			if (toPay.getValuePaid() == toPay.getValue()) {
+				toPay.setPaid(true);
+			}
+		}
+		
 	}
 
 	public boolean searchBill(String concept) {
@@ -49,6 +67,19 @@ public class Provider {
 			}
 		}
 		return ward;
+	}
+	
+	public Bill searchBills(String billConcept) throws InvalidInformationException {
+		Bill toSearch = null;
+		for (int i = 0; i < bills.size(); i++) {
+			if (bills.get(i).getConcept().equalsIgnoreCase(billConcept)) {
+				toSearch = bills.get(i);
+			}
+		}
+		if (toSearch == null) {
+			throw new InvalidInformationException();
+		}
+		return toSearch;
 	}
 
 	public String showPaymentsMade() {
