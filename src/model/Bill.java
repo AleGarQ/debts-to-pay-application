@@ -15,6 +15,7 @@ public class Bill {
 	private String paymentMethod;
 	private boolean paid;
 	private double valuePaid;
+	private boolean mora;
 
 	public Bill(String concept, boolean current, double value, GregorianCalendar builtDate,
 			GregorianCalendar finalPaymentDate, double interestPercentage, int fee, String paymentMethod, boolean paid,
@@ -29,6 +30,7 @@ public class Bill {
 		this.paid = paid;
 		this.valuePaid = valuePaid;
 		this.value = value * (1 + interestPercentage);
+		setMora(false);
 	}
 
 	public String verifyBillState(double paidValue) throws ExceededBillValueException {
@@ -104,5 +106,19 @@ public class Bill {
 
 	public void setValuePaid(double valuePaid) {
 		this.valuePaid = valuePaid;
+	}
+
+	/**
+	 * @return the mora
+	 */
+	public boolean isMora() {
+		return mora;
+	}
+
+	/**
+	 * @param mora the mora to set
+	 */
+	public void setMora(boolean mora) {
+		this.mora = mora;
 	}
 }

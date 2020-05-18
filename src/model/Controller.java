@@ -11,10 +11,12 @@ import exceptions.InvalidInformationException;
 import exceptions.ProviderAlreadyOnListException;
 
 public class Controller {
+	public final static long DAYS_30 = (long)2.592e+9;
+	public final static long DAYS_60 = (long)5.184e+9;
+	
 	private ArrayList<Provider> providers;
 	private Account firstAccount;
-	public final static long DAYS_30 = (long)2.592e+9;
-
+	
 	public Controller() throws BillAlreadyOnListException {
 		this.providers = new ArrayList<Provider>();
 		providers.add(new Provider(new BankEntity("12345", "bancolombia"), "colombina", "12345", "Sebastian", "3105896411", true));
@@ -67,7 +69,7 @@ public class Controller {
 			}
 		} 
 		return toSearch;
-		
+		 
 	}
 
 	public String showBillsToPay() {
@@ -289,4 +291,18 @@ public class Controller {
 		return bills;
 	}
 	
+	public List<Bill> getBillsExpires60() {
+		ArrayList<Bill> bills = new ArrayList<Bill>();
+		GregorianCalendar today= new GregorianCalendar();
+		for (int i = 0; i < providers.size(); i++) {
+			if (!providers.get(i).getBills().isEmpty()) {
+				for (int j = 0; j < providers.get(i).getBills().size(); j++) {
+					if (!bills.get(j).isPaid() && bills.get(j).getFinalPaymentDate().compareTo(today) < DAYS_60) {
+						bills.add(providers.get(i).getBills().get(j));
+					}	
+				}
+			}
+		}
+		return bills;
+	}
 }
