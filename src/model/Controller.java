@@ -250,13 +250,12 @@ public class Controller {
 		
 		return bills;
 	}
-<<<<<<< HEAD
 
 	public void insertionSortPaymentsByValue() {
 		for (int i = 0; i < providers.size(); i++) {
 			providers.get(i).insertionSortBillsByValue();
 		}
-=======
+	}
 	
 	public List<Bill> getPaidBills(){
 		ArrayList<Bill> bills = new ArrayList<Bill>();
@@ -314,6 +313,5 @@ public class Controller {
 			}
 		}
 		return bills;
->>>>>>> 68bfd3383af0c7872a8b05d31a3d1e662c26a8a2
 	}
 }
