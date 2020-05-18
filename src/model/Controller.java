@@ -16,11 +16,14 @@ public class Controller {
 
 	public Controller() throws BillAlreadyOnListException {
 		this.providers = new ArrayList<Provider>();
-		providers.add(new Provider(new BankEntity("12345", "bancolombia"), "colombina", "12345", "Sebastian", "3105896411", true));
-		providers.add(new Provider(new BankEntity("123456", "bancolombia"), "coca cola", "123456", "Alejandro", "3105896411", false));
-		providers.add(new Provider(new BankEntity("1234567", "bancolombia"), "rimax", "1234567", "Isabella", "3105896411", true));
-		providers.add(new Provider(new BankEntity("12345678", "bancolombia"), "dell", "12345678", "Maria", "3105896411", false));
-		providers.get(1).addBill("Vasos", true, 150000.0, new GregorianCalendar(2001, 01, 22), new GregorianCalendar(2010, 01, 22), 0.1, 0, "no lo se", false, 100000.0);
+		providers.add(new Provider(new BankEntity("12345", "Bancolombia"), "Colombina", "12345", "Sebastian", "3105896411", true));
+		providers.add(new Provider(new BankEntity("123456", "Bancolombia"), "Coca cola", "123456", "Alejandro", "3105896411", false));
+		providers.add(new Provider(new BankEntity("1234567", "Bancolombia"), "Rimax", "1234567", "Isabella", "3105896411", true));
+		providers.add(new Provider(new BankEntity("12345678", "Bancolombia"), "Dell", "12345678", "Maria", "3105896411", false));
+		providers.get(0).addBill("Arequipe", true, 150000.0, new GregorianCalendar(1998, 11, 19), new GregorianCalendar(2020, 11, 19), 0.1, 0, "no lo se", false, 100000.0);
+		providers.get(1).addBill("Bebidas", true, 200000.0, new GregorianCalendar(2001, 01, 22), new GregorianCalendar(2020, 01, 22), 0.1, 0, "no lo se", true, 200000.0);
+		providers.get(2).addBill("Sillas", true, 300000.0, new GregorianCalendar(2001, 06, 05), new GregorianCalendar(2020, 06, 05), 0.1, 0, "no lo se", false, 250000.0);
+		providers.get(3).addBill("Pantallas", true, 150000.0, new GregorianCalendar(1998, 02, 8), new GregorianCalendar(2020, 02, 8), 0.1, 0, "no lo se", true, 150000.0);
 		firstAccount = new Account("Alejandro", "Garcia", "alejandro.garcia1@hotmail.com", "p", "p");
 	}
 
@@ -243,5 +246,11 @@ public class Controller {
 		}
 		
 		return bills;
+	}
+
+	public void insertionSortPaymentsByValue() {
+		for (int i = 0; i < providers.size(); i++) {
+			providers.get(i).insertionSortBillsByValue();
+		}
 	}
 }

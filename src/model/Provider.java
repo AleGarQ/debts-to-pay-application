@@ -139,4 +139,18 @@ public class Provider {
 		String info = bussinessName + " |" + nit + " |" + account.getBankName() +" |"+ account.getAccountNumber() + " |" + intermediaryName + " |"+ intermediaryPhone + " |" + working;
 		return info;
 	}
+	
+	public void insertionSortBillsByValue() {
+		Bill aux = null;
+		
+		for (int i = 1; i < bills.size(); i++) {
+			for (int j = 0; j < bills.size() - i; j++) {
+				if (bills.get(j).getValuePaid() > bills.get(j + 1).getValuePaid()) {
+					aux = bills.get(j);
+					bills.set(j, bills.get(j + 1));
+					bills.set(j + 1, aux);
+				}
+			}
+		}
+	}
 }

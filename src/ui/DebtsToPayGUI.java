@@ -319,11 +319,8 @@ public class DebtsToPayGUI {
 	@FXML
 	void showPayments(ActionEvent event) throws IOException {
 		if (showPayments.getValue() != null && sortPayments.getValue() != null && (screenBoxPay.isSelected() || textFileBoxPay.isSelected())) {
-			if (sortPayments.getValue().equals("Bussines")) {
-//				control.insertionSortPaymentsByBussines();
-				optionsToPrintPayments();
-			}else if (sortPayments.getValue().equals("Value")) {
-//				control.sortPaymentsByValue();
+			if (sortPayments.getValue().equals("Value")) {
+				control.insertionSortPaymentsByValue();
 				optionsToPrintPayments();
 			}else {
 //				control.sortPaymentsByConcept();
@@ -345,19 +342,19 @@ public class DebtsToPayGUI {
 				loadPaymentsList();
 			}
 			
-			ArrayList<Bill> aux = (ArrayList) control.getBills();
+			ArrayList<Bill> aux = (ArrayList<Bill>) control.getBills();
 			for (int i = 0; i < aux.size(); i++) {
-				paymentsInfo += aux.get(i) + "\n";
+				paymentsInfo += aux.get(i).getConcept() + " |" + aux.get(i).getValuePaid() + "\n";
 			}
 		}
 		
-		if (textFileBoxProv.isSelected()) {
-			PrintWriter writer = new PrintWriter("data/Providers Information.txt");
+		if (textFileBoxPay.isSelected()) {
+			PrintWriter writer = new PrintWriter("data/Payments Information.txt");
 			
-			writer.println("          PROVIDERS INFO          ");
-			writer.println("----------------------------------");
-			writer.println("----------------------------------");
-			writer.println("Business| NIT	| Bank	| Account #	| Intermediary	| Phone	| State");
+			writer.println("          PAYMENTS INFO          ");
+			writer.println("---------------------------------");
+			writer.println("---------------------------------");
+			writer.println("Concept | Value Paid");
 
 			writer.println(paymentsInfo);
 			
@@ -413,7 +410,7 @@ public class DebtsToPayGUI {
 				loadProvidersList();
 			}
 			
-			ArrayList<Provider> aux = (ArrayList) control.getProviders();
+			ArrayList<Provider> aux = (ArrayList<Provider>) control.getProviders();
 			for (int i = 0; i < aux.size(); i++) {
 				providersInfo += aux.get(i) + "\n";
 			}
@@ -422,7 +419,7 @@ public class DebtsToPayGUI {
 				loadActiveProvidersList();
 			}
 
-			ArrayList<Provider> aux = (ArrayList) control.getProviders();
+			ArrayList<Provider> aux = (ArrayList<Provider>) control.getProviders();
 			for (int i = 0; i < aux.size(); i++) {
 				if (aux.get(i).isWorking()) {
 					providersInfo += aux.get(i) + "\n";
@@ -433,7 +430,7 @@ public class DebtsToPayGUI {
 				loadInactiveProvidersList();
 			}
 			
-			ArrayList<Provider> aux = (ArrayList) control.getProviders();
+			ArrayList<Provider> aux = (ArrayList<Provider>) control.getProviders();
 			for (int i = 0; i < aux.size(); i++) {
 				if (!aux.get(i).isWorking()) {
 					providersInfo += aux.get(i) + "\n";
@@ -444,7 +441,7 @@ public class DebtsToPayGUI {
 				loadWBProvidersList();
 			}
 			
-			ArrayList<Provider> aux = (ArrayList) control.getProviders();
+			ArrayList<Provider> aux = (ArrayList<Provider>) control.getProviders();
 			for (int i = 0; i < aux.size(); i++) {
 				if (aux.get(i).getBills().isEmpty()) {
 					providersInfo += aux.get(i) + "\n";
@@ -610,7 +607,7 @@ public class DebtsToPayGUI {
 
 		sortPayList.removeAll(sortPayList);
 		String value = "Value";
-		sortPayList.addAll(bussi, value, conc);
+		sortPayList.addAll(value, conc);
 		sortPayments.getItems().addAll(sortPayList);
 
 		showProvList.removeAll(showProvList);

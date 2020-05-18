@@ -1,0 +1,9 @@
+          PAYMENTS INFO          
+---------------------------------
+---------------------------------
+Concept | Value Paid
+Arequipe |100000.0
+Bebidas |200000.0
+Sillas |250000.0
+Pantallas |150000.0
+
