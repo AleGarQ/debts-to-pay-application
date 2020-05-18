@@ -13,6 +13,7 @@ import exceptions.ProviderAlreadyOnListException;
 public class Controller {
 	private ArrayList<Provider> providers;
 	private Account firstAccount;
+	public final static long DAYS_30 = (long)2.592e+9;
 
 	public Controller() throws BillAlreadyOnListException {
 		this.providers = new ArrayList<Provider>();
@@ -244,4 +245,48 @@ public class Controller {
 		
 		return bills;
 	}
+	
+	public List<Bill> getPaidBills(){
+		ArrayList<Bill> bills = new ArrayList<Bill>();
+		for (int i = 0; i < providers.size(); i++) {
+			if (!providers.get(i).getBills().isEmpty()) {
+				for (int j = 0; j < providers.get(i).getBills().size(); j++) {
+					if (!bills.get(j).isPaid()) {
+						bills.add(providers.get(i).getBills().get(j));
+					}	
+				}
+			}
+		}
+		return bills;
+	}
+	
+	public List<Bill> getBillsToPay() {
+		ArrayList<Bill> bills = new ArrayList<Bill>();
+		for (int i = 0; i < providers.size(); i++) {
+			if (!providers.get(i).getBills().isEmpty()) {
+				for (int j = 0; j < providers.get(i).getBills().size(); j++) {
+					if (bills.get(j).isPaid()) {
+						bills.add(providers.get(i).getBills().get(j));
+					}	
+				}
+			}
+		}
+		return bills;
+	}
+	
+	public List<Bill> getBillsExpires30() {
+		ArrayList<Bill> bills = new ArrayList<Bill>();
+		GregorianCalendar today= new GregorianCalendar();
+		for (int i = 0; i < providers.size(); i++) {
+			if (!providers.get(i).getBills().isEmpty()) {
+				for (int j = 0; j < providers.get(i).getBills().size(); j++) {
+					if (!bills.get(j).isPaid() && bills.get(j).getFinalPaymentDate().compareTo(today) < DAYS_30) {
+						bills.add(providers.get(i).getBills().get(j));
+					}	
+				}
+			}
+		}
+		return bills;
+	}
+	
 }

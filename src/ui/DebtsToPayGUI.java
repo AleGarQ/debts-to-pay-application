@@ -113,6 +113,18 @@ public class DebtsToPayGUI {
     private CheckBox screenBoxBill;
     @FXML
     private CheckBox textFileBoxBill;
+    @FXML
+    private TableView<?> billsTable;
+    @FXML
+    private TableColumn<?, ?> conceptColumnBill;
+    @FXML
+    private TableColumn<?, ?> valueColumnBill;
+    @FXML
+    private TableColumn<?, ?> initialDColumnBill;
+    @FXML
+    private TableColumn<?, ?> finalDColumnBill;
+    @FXML
+    private TableColumn<?, ?> valuePaidColumnBill;
 	
 //	Show Payments---------------------------------------------
 	@FXML
@@ -271,12 +283,12 @@ public class DebtsToPayGUI {
 	
 	@FXML
 	void registerNewBill(ActionEvent event) {
-		
+		//TODO
 	}
 	
 	@FXML
 	void registerPayment(ActionEvent event) {
-		
+		//TODO
 	}
 	
 	@FXML
