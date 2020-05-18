@@ -3,8 +3,12 @@ package ui;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import exceptions.BillAlreadyOnListException;
+import exceptions.ExceededBillFinalPaymentDayException;
+import exceptions.ExceededBillValueException;
+import exceptions.InvalidInformationException;
 import exceptions.ProviderAlreadyOnListException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -113,6 +117,18 @@ public class DebtsToPayGUI {
     private CheckBox screenBoxBill;
     @FXML
     private CheckBox textFileBoxBill;
+    @FXML
+    private TableView<?> billsTable;
+    @FXML
+    private TableColumn<?, ?> conceptColumnBill;
+    @FXML
+    private TableColumn<?, ?> valueColumnBill;
+    @FXML
+    private TableColumn<?, ?> initialDColumnBill;
+    @FXML
+    private TableColumn<?, ?> finalDColumnBill;
+    @FXML
+    private TableColumn<?, ?> valuePaidColumnBill;
 	
 //	Show Payments---------------------------------------------
 	@FXML
@@ -271,12 +287,80 @@ public class DebtsToPayGUI {
 	
 	@FXML
 	void registerNewBill(ActionEvent event) {
-		
+		if (!valueBill.getText().equals("") && !providerNameBill.getText().equals("") && !limitPaymentDate.getText().equals("") && !conceptBill.getText().equals("") 
+				&& !current.getText().equals("") && !interestPercentage.getText().equals("") && !paymentMethod.getText().equals("") && !fees.getText().equals("")) {
+			try {
+				boolean newC = true;
+				if (current.getText().equals("false")) 
+					newC = false;
+				
+				GregorianCalendar limit = new GregorianCalendar(Integer.valueOf(limitPaymentDate.getText().substring(0, 3)), Integer.valueOf(limitPaymentDate.getText().substring(5, 6)), Integer.valueOf(limitPaymentDate.getText().substring(8, 9)));
+				control.addBill(providerNameBill.getText(), conceptBill.getText(), newC,  Double.parseDouble(valueBill.getText()), new GregorianCalendar(), 
+						limit, Double.parseDouble(interestPercentage.getText()), Integer.valueOf(fees.getText()), paymentMethod.getText(), false, 0);
+				valueBill.setText("");
+				providerNameBill.setText("");
+				limitPaymentDate.setText("");
+				conceptBill.setText("");
+				current.setText("");
+				interestPercentage.setText("");
+				paymentMethod.setText("");
+				fees.setText("");
+			} catch (BillAlreadyOnListException e) {
+				Alert billAlready = new Alert(AlertType.WARNING);
+				billAlready.setTitle("BILL IS ALREADY ON LIST");
+				billAlready.setHeaderText(e.getMessage());
+				billAlready.setContentText("Please make sure it is right");
+				billAlready.showAndWait();
+			} catch (Exception e) {
+				e.getMessage();
+			}
+		} else {
+			Alert fields = new Alert(AlertType.WARNING);
+			fields.setTitle("EMPTY FIELDS");
+			fields.setHeaderText("Some fields are empty");
+			fields.setContentText("Please fill them and try again");
+			fields.showAndWait();
+		}
 	}
+		
 	
 	@FXML
 	void registerPayment(ActionEvent event) {
-		
+		if (!conceptPay.getText().equals("") && !valuePay.getText().equals("") && !providerNamePay.getText().equals("")) {
+			try {
+				control.addPayment(providerNamePay.getText(), conceptPay.getText(), Double.parseDouble(valuePay.getText()));
+				conceptPay.setText("");
+				valuePay.setText("");
+				providerNamePay.setText("");
+			} catch (InvalidInformationException e) {
+				Alert InvalidInformation = new Alert(AlertType.WARNING);
+				InvalidInformation.setTitle("THE INFORMATION YOU TYPE IS INVALID");
+				InvalidInformation.setHeaderText(e.getMessage());
+				InvalidInformation.setContentText("Please try again");
+				InvalidInformation.showAndWait();
+			} catch (ExceededBillValueException e) {
+				Alert ExceededValue = new Alert(AlertType.WARNING);
+				ExceededValue.setTitle("THE PAYMENT PASS THE AMOUNT OF THE BILL");
+				ExceededValue.setHeaderText(e.getMessage());
+				ExceededValue.setContentText("Pleasy try again with other amount");
+				ExceededValue.showAndWait();
+			} catch (ExceededBillFinalPaymentDayException e) {
+				Alert ExceededDate = new Alert(AlertType.INFORMATION);
+				ExceededDate.setTitle("BILL IS ALREADT ON LIST");
+				ExceededDate.setHeaderText(e.getMessage());
+				ExceededDate.setContentText("The amount to pay will be more");
+				ExceededDate.showAndWait();
+			} catch (Exception e) {
+				e.getMessage();
+				
+			} 	
+		} else {
+			Alert fields = new Alert(AlertType.WARNING);
+			fields.setTitle("EMPTY FIELDS");
+			fields.setHeaderText("Some fields are empty");
+			fields.setContentText("Please fill them and try again");
+			fields.showAndWait();
+		}
 	}
 	
 	@FXML
@@ -313,6 +397,15 @@ public class DebtsToPayGUI {
 	
 	@FXML
 	void showBills(ActionEvent event) {
+		if (showBills.getValue() != null && sortBills != null && (screenBoxBill.isSelected() || textFileBoxBill.isSelected()) ) {
+			if (sortBills.getValue().equals("Paid Value")) {
+				
+			} else if (sortBills.getValue().equals("concept")) {
+				
+			} else {
+				
+			}
+		}
 		
 	}
 	
@@ -573,7 +666,28 @@ public class DebtsToPayGUI {
 	
 	@FXML
 	void updateIntermediary(ActionEvent event) {
+		if (!intermediaryNameUpd.getText().equals("") && !intermediaryPhoneUpd.getText().equals("") && !providerNameUpd.getText().equals("")) {
+			try {
+				control.modifyProvider(providerNameUpd.getText(), intermediaryNameUpd.getText(), intermediaryPhoneUpd.getText());
+				intermediaryNameUpd.setText("");
+				intermediaryPhoneUpd.setText("");
+				providerNameUpd.setText("");
+			} catch (InvalidInformationException e) {
+				Alert InvalidInformation = new Alert(AlertType.WARNING);
+				InvalidInformation.setTitle("THE INFORMATION YOU TYPE IS INVALID");
+				InvalidInformation.setHeaderText(e.getMessage());
+				InvalidInformation.setContentText("Please try again");
+				InvalidInformation.showAndWait();
+			}
+		} else {
+			Alert fields = new Alert(AlertType.WARNING);
+			fields.setTitle("EMPTY FIELDS");
+			fields.setHeaderText("Some fields are empty");
+			fields.setContentText("Please fill them and try again");
+			fields.showAndWait();
+		}
 		
+	
 	}
 
 	public void initializeComboBoxLists() {

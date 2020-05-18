@@ -44,8 +44,9 @@ public class Provider {
 	public void addPayment(String billConcept, double value) throws InvalidInformationException, ExceededBillValueException, ExceededBillFinalPaymentDayException {
 		Bill toPay = searchBills(billConcept);
 		Calendar today = new GregorianCalendar();
-		if (today.compareTo(toPay.getFinalPaymentDate()) > 0) {
+		if (today.compareTo(toPay.getFinalPaymentDate()) > 0 && !toPay.isMora()) {
 			toPay.setValue(toPay.getValue() * (1 + toPay.getInterestPercentage()));
+			toPay.setMora(true);
 			throw new ExceededBillFinalPaymentDayException();
 		} 
 		if (toPay.getValue() - toPay.getValuePaid() < value) {
