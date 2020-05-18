@@ -398,15 +398,59 @@ public class DebtsToPayGUI {
 	@FXML
 	void showBills(ActionEvent event) {
 		if (showBills.getValue() != null && sortBills != null && (screenBoxBill.isSelected() || textFileBoxBill.isSelected()) ) {
-			if (sortBills.getValue().equals("Paid Value")) {
-				
-			} else if (sortBills.getValue().equals("concept")) {
-				
-			} else {
-				
+			if (textFileBoxBill.isSelected()) {
+				if (sortBills.getValue().equals("Paid Value")) {
+					if (showBills.getValue().equals("All")) {
+						
+					} else if (showBills.getValue().equals("Paid")) {
+						
+					} else if (showBills.getValue().equals("To pay")) {
+						
+					} else if (showBills.getValue().equals("Expires in 30 days")) {
+						
+					} else if (showBills.getValue().equals("Expires in 60 days")) {
+						
+					}
+				} else if (sortBills.getValue().equals("concept")) {
+					if (showBills.getValue().equals("All")) {
+						
+					} else if (showBills.getValue().equals("Paid")) {
+						
+					} else if (showBills.getValue().equals("To pay")) {
+						
+					} else if (showBills.getValue().equals("Expires in 30 days")) {
+						
+					} else if (showBills.getValue().equals("Expires in 60 days")) {
+						
+					}
+				} else {
+					if (showBills.getValue().equals("All")) {
+						
+					} else if (showBills.getValue().equals("Paid")) {
+						
+					} else if (showBills.getValue().equals("To pay")) {
+						
+					} else if (showBills.getValue().equals("Expires in 30 days")) {
+						
+					} else if (showBills.getValue().equals("Expires in 60 days")) {
+						
+					}
+				}
+			} 
+			if (screenBoxBill.isSelected()){
+				if (showBills.getValue().equals("All")) {
+					
+				} else if (showBills.getValue().equals("Paid")) {
+					
+				} else if (showBills.getValue().equals("To pay")) {
+					
+				} else if (showBills.getValue().equals("Expires in 30 days")) {
+					
+				} else if (showBills.getValue().equals("Expires in 60 days")) {
+					
+				}
 			}
 		}
-		
 	}
 	
 	@FXML
