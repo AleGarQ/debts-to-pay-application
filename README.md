@@ -14,6 +14,9 @@ y cambiar el estado de la deuda.
 
 En nuestro diagrama de clase podemos ver que nuestro modelo está conformado por 5 clases, siendo la clase principal el controller. Esta tiene una relación principal con provider, el cual es un arraylist. 
 
+## Video
+https://youtu.be/JUiTaDYeQ2U
+
 We start solving these with the [problem](https://docs.google.com/document/d/1KS1mTscsAdj7R-Pp-OuNCIrbNyIHbH208rkEWiiFymk/edit?usp=sharing).
 Here we have the [Analysis documentation](https://docs.google.com/document/d/1m5uOqEPLgHsYKFN3MiIrXLcXWoomejbTlUCeS9a8Is8/edit?usp=sharing).
 Finally, the [Design documentation]()
